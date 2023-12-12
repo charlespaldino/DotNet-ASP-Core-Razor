@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using PaldinoCrafts.Website.Models
+@using PaldinoCrafts.WebSite.Services
+@inject ProductService product_service
+
+<div class="card-columns">
+    @foreach (Product product in product_service.GetProducts())
+    {
+    <div class="card">
+        <div class="card-img" style="background-image: url('@product.Image');"></div>
+        <div class="card-body">
+            <h6 class="card-title">@product.Title</h6>
+        </div>
+        <div class="text_align_center">
+            <small class="text-muted">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    int current_star = i;
+                    if (i <= product.AverageRating)
+                    {
+                        <span class="fa-solid fa-star fa-fw yellow"></span>
+                    }
+                    else
+                    {
+                        <span class="fa-solid fa-star fa-fw"></span>
+                    }
+                }
+                <br />
+                <button class="btn btn-primary margin_5" type="button" @onclick="(e => selectProduct(product.ID))"
+                        data-toggle="modal" data-target="#product_modal">
+                    More Info
+                </button>
+            </small>
+        </div>
+    </div>
+      
+    }
+</div>
+
+<div class="modal fade" id="product_modal" tabindex="-1" role="dialog" aria-labelledby="productTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        @if (selected_product != null)
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productTitle">@selected_product.Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('@selected_product.Image');">
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">@selected_product.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if (selected_product.VoteCount == 0)
+                    {
+                        <span>Be the first to vote!</span>
+                    }
+                    else
+                    {
+                        <span>@selected_product.VoteCount @moreinfo_label_votestatement</span>
+                    }
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        int current_star = i;
+                        <span class="fa-solid fa-star fa-fw" @onclick="(e => submitRating(selected_product.ID, current_star))" data-dismiss="modal"></span>                       
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    String? moreinfo_label_votestatement = "";
+    Product selected_product;
+
+    void selectProduct(String product_id)
+    {
+        selected_product = product_service.GetProducts().First(product => product.ID == product_id);
+        moreinfo_label_votestatement = "Vote" + (selected_product.VoteCount > 1 ? "s" : "");
+    }
+
+    void submitRating(String product_id, int rating)
+    {
+        System.Console.WriteLine($"Rating received for {selected_product?.ID}: {rating}");
+        if (selected_product == null) { return; }
+
+        product_service.AddRating(selected_product.ID, rating);
+        selectProduct(selected_product.ID);
+    }
+}
