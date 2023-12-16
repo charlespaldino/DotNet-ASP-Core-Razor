@@ -1,0 +1,22 @@
+﻿@page
+@model MoviesApp.Pages.LoginModel
+@{
+}
+<head>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+
+
+<div class="wrapper">
+    <div id="formContent">
+        <br />
+        <div>
+            <label>Please Log In</label>
+        </div>
+        <form method="post">
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+            <input type="text" id="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="submit" class="form-control w-50 btn-primary" style="text-align:center;" value="Log In">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@page "{id:int}"
+@using System.Web;
+@model MoviesApp.Pages.MovieDetailsModel
+@{
+    ViewData["Title"] = "Movie Details";
+}
+<center>
+<h3>@ViewData["Title"]</h3>
+</center>
+<hr />
+<div style="text-align:center">
+    <a href="/Movies" class="btn btn-primary">Back To List</a>
+</div>
+<hr />
+
+<div>
+    @(await Html.RenderComponentAsync<MoviesApp.Components.MovieDetails>(RenderMode.ServerPrerendered, new 
+        {
+        Title = HttpUtility.HtmlDecode(@Model.movie_details?.Title),
+        ImageURL = @Model.movie_details?.ImageURL,
+        Description = HttpUtility.HtmlDecode(@Model.movie_details?.Description),
+        Rating = @Model.movie_details?.Rating + "",
+    }))
+</div>

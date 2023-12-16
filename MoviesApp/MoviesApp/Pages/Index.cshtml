@@ -1,0 +1,11 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home - Latest Review";
+}
+
+<div class="text-center">
+    <h1>Welcome to Movie Reviews</h1>
+</div>
+<hr />
+@(await Html.RenderComponentAsync<MoviesApp.Components.LatestMovieCard>(RenderMode.ServerPrerendered))

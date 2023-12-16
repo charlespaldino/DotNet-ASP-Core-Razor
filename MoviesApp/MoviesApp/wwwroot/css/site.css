@@ -1,0 +1,121 @@
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+tr
+{
+    text-align: center;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.addmovie_rating
+{
+    max-width: 75px;
+    text-align: center;
+}
+
+.div_login {
+    color: red;
+}
+
+.image_list
+{
+    max-width: 125px;
+}
+
+.image_details {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.image_latestreview {
+    width: 350px;
+    height: 350px;
+}
+
+.div_topright 
+{
+    float: right;
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.div_topleft {
+    float: left;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.card_details {
+}
+
+.card-header{
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-title 
+{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+table {
+}
+
+ul{
+    list-style: inside;
+}
+
+.ul-list-align 
+{
+    text-align: left;
+    width: 275px;
+}
+
+figcaption
+{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 1000px) {
+    .div_login {
+        position: fixed;
+        top: 1em;
+        right: 1em;
+        color: black;
+    }
+
+    table 
+    {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 75%;
+    }
+
+    .card_details {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 75%;
+    }
+}

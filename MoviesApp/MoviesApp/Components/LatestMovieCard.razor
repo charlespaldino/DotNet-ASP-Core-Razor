@@ -1,0 +1,36 @@
+﻿@using MoviesApp.Services
+@using MoviesApp.Data.Models
+@inject IMoviesService movies_service
+
+<div class="align-content-center">
+    <div class="card card_details">
+        <div class="card-header">
+            <h5 class="card-title">Our latest review!</h5>
+        </div>
+        <div class="card-body">
+            <div>                
+                <center>
+                    <h5 class="card-title">@latest_movie?.Title (@latest_movie?.Rating/10)</h5>
+                    <a href="/MovieDetails/@latest_movie?.ID"><img class="img-fluid img-rounded image_latestreview" src="@latest_movie?.ImageURL" /></a>                
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private Movie latest_movie { get; set; }
+    
+    [Inject]
+    private IMoviesService movie_service { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Inject before anything else, will cause null errors.
+        await base.OnInitializedAsync();
+        latest_movie = movies_service.GetAllMovies().Last();
+    }
+
+
+}

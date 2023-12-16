@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using MoviesApp.Data.Models
+
+<div class="align-content-center">
+    <div class="card card_details">
+        <div class="card-header">
+            <h5 class="card-title">@Title (@Rating/10)</h5>
+        </div>
+        <div class="card-body">
+            <div class="div_topleft">
+                <img class="img-fluid img-rounded image_details" src="@ImageURL" />
+            </div>
+            <p class="card-text">@Description</p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public String Title { get; set; } = "";
+    [Parameter]
+    public String Description { get; set; } = "";
+    [Parameter]
+    public String ImageURL { get; set; } = "";
+    [Parameter]
+    public String Rating { get; set; } = "";
+
+}

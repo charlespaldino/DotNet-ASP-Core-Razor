@@ -1,0 +1,45 @@
+﻿@page
+@using MoviesApp.Util;
+@model MoviesApp.Pages.MoviesModel
+@{
+    ViewData["Title"] = "Movie List";
+}
+<center>
+<h3>@ViewData["Title"]</h3>
+</center>
+<hr />
+
+@if (User.IsInRole(SecurityUtils.ROLE_ADMIN))
+{
+    <div style="text-align:center">
+        <a href="/AddMovie" class="btn btn-primary">Add New Movie</a>
+    </div>
+    <hr />
+}
+
+<div class="align-content-center">
+<table class="table table-striped" width="80%">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Rate</th>
+            <th scope="col">Actions</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var movie in Model.movie_list)
+        {
+                @(await Html.RenderComponentAsync<MoviesApp.Components.MovieRow>(RenderMode.ServerPrerendered, new
+                {
+                    ID = @movie.ID,
+                    Title = @movie.Title,
+                    ImageURL = @movie.ImageURL,                    
+                    Rating = @movie.Rating + "",
+                }))
+        }
+    </tbody>
+</table>
+</div>

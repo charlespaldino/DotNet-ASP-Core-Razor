@@ -1,0 +1,22 @@
+﻿
+<tr>
+    <th scope="row"></th>
+    <td class="align-content-center"><img class="img-fluid img-rounded image_list" src="@ImageURL" /></td>
+    <td>@Title</td>
+    <td>@Rating/10</td>
+    <td><a href="/MovieDetails/@ID" class="btn btn-secondary">Show details</a></td>
+</tr>
+
+@code {
+
+    [Parameter]
+    public String Title { get; set; } = "";
+    [Parameter]
+    public int ID { get; set; } = -1;
+    [Parameter]
+    public String ImageURL { get; set; } = "";
+    [Parameter]
+    public String Rating { get; set; } = "";
+
+}
+
